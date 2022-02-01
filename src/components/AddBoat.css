@@ -1,4 +1,4 @@
-.task-input {
+.boat-input {
     background: #FAFAFA;
     margin-bottom: 8px;
     padding: 8px;
@@ -12,10 +12,9 @@
   }
   
   .button {
-    border-radius: 2px;
+    border-radius: 4px;
     color: black;
     cursor: pointer;
-    display: flex;
     align-items: center;
   }
   
@@ -25,11 +24,21 @@
   }
   
   .add-button {
-    background-color: rgb(100,149,237);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+
+  .submit-button {
+    background-color: green;
   }
   
   .cancel-button {
     background-color: rgb(255,99,71);
+  }
+
+  .button-alignment {
+      flex-direction: row;
   }
   
   .open-add-button {

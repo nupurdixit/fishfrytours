@@ -7,9 +7,7 @@ export default class AddBoat extends React.Component {
     this.state = {
       boatInfo: {name: '', status:''},
       editing: false,
-      // show: true
     }
-    // this.handleshow = this.handleshow.bind(this);
   }
 
   handleInputChange = e => {
@@ -24,7 +22,6 @@ export default class AddBoat extends React.Component {
     const boatName = this.textInput.value.trim();
    
     if (boatName) {
-      // this.props.onAdd(boatName, "Docked");
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,9 +29,11 @@ export default class AddBoat extends React.Component {
     };
     fetch('http://localhost:3000/boats/addBoat', requestOptions)
         .then(response => response.json())
-        .then(data => this.setState({boatInfo: data}));
+        .then(data => this.setState({boatInfo: data}),console.log("insert api response is: ", this.state.boatInfo));
       console.log("Inside AddBoat");
+      console.log("boatlist is:", this.props.boatlist);
     }
+    window.location.reload(false);
     this.textInput.value = '';
   }
 
@@ -44,29 +43,21 @@ export default class AddBoat extends React.Component {
     });
   }
 
-  // handleshow() {
-  //   this.setState ((prevState) => {
-  //     return {
-  //       show : !prevState.show
-  //     }
-  //   });
-  // }
-
   render() {
     if(!this.state.editing) {
       return (
-        <div className="open-add-button" onClick={() => this.setEditing(true)}>
+        <div className="open-add-button add-button" onClick={() => this.setEditing(true)}>
           <button className="button">Add Boat</button>
         </div>  
         ); 
     }
       return (
         <form className="card add-task-form" onSubmit={(e) => this.onSubmit(e)}>
-          <input type="text" class="task-input" ref={input => this.textInput = input} aria-label="Add Boat" onChange={this.handleInputChange}/>
+          <input type="text" className="boat-input" placeholder="Enter Boat Name" ref={input => this.textInput = input} aria-label="Add Boat" onChange={this.handleInputChange}/>
           <div>
-            <button className="button add-button"> Submit </button>
-             
-            <button className="button cancel-button" onClick={() => this.setEditing(false)}>Cancel</button>
+            <button className="button submit-button"> Submit </button>
+                &nbsp;&nbsp;
+           <button className="button cancel-button" onClick={() => this.setEditing(false)}>Cancel</button>  
           </div>
         </form>
       );

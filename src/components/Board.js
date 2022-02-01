@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Boatstatus from './Boatstatus';
-import './Board.css';
 import AddBoat from './AddBoat';
 import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Board.css';
 
 export default class Board extends Component {
   constructor(props) {
@@ -31,18 +32,6 @@ export default class Board extends Component {
         console.log("boat list is:", dataByStatus);
       })
   }
-
-  // addBoat(boatName) {
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ name: boatName })
-  //   };
-  //   fetch('http://localhost:3000/boats/add', requestOptions)
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ boatInfo: data }));
-  //   console.log("Inside AddBoat");
-  // }
 
 render() {
   console.log(this.state.boatlist)
