@@ -38,7 +38,7 @@
   }
 
   .button-alignment {
-      flex-direction: row;
+      padding-top: 10px;
   }
   
   .open-add-button {

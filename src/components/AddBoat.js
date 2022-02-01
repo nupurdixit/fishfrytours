@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AddBoat.css';
+import { Button, Modal, ModalBody } from 'react-bootstrap';
 
 export default class AddBoat extends React.Component {
   constructor(props) {
@@ -8,25 +9,40 @@ export default class AddBoat extends React.Component {
       boatInfo: { name: '', status: '' },
       selectedStatus: " ",
       editing: false,
+      showModal: false,
+      show: true,
+      setShow: false
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
-  handleInputChange(e) {
+  setEditing(editing) {
+    this.setState({
+      editing
+    });
+  }
+
+  handleClose = () => {
+    this.setState({ setShow: false });
+  }
+
+  handleShow = () => {
+    this.setState({ setShow: true });
+  }
+
+  handleInputChange = (e) => {
     this.setState({
       selectedStatus: e.target.value,
     });
   };
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
 
     const newBoatName = this.textInput.value.trim();
     const newBoatStatus = this.state.selectedStatus;
-    // const successMessage = '';
-    // const [errorMessage, setErrorMessage] = useState('');
-    // const setAddSuccessMessage = newBoatName + " has been added";
-    console.log("selected boat status is:", newBoatStatus);
 
     if (newBoatName && newBoatStatus) {
       const requestOptions = {
@@ -36,7 +52,7 @@ export default class AddBoat extends React.Component {
       };
       fetch('http://localhost:3000/boats/addBoat', requestOptions)
         .then(response => response.json())
-        //.then(data => <p> {setAddSuccessMessage} </p>);
+      //.then(data => <p> {setAddSuccessMessage} </p>);
       console.log("Inside AddBoat");
       console.log("boatlist is:", this.props.boatlist);
     }
@@ -44,37 +60,43 @@ export default class AddBoat extends React.Component {
     this.textInput.value = '';
   }
 
-  setEditing(editing) {
-    this.setState({
-      editing
-    });
-  }
 
   render() {
     if (!this.state.editing) {
       return (
         <div className="open-add-button add-button" onClick={() => this.setEditing(true)}>
-          <button className="button">Add Boat</button>
+          <button className="button" onClick={this.handleShow}>Add Boat</button>
         </div>
       );
     }
-    return (
-      <form className="card add-task-form" onSubmit={(e) => this.onSubmit(e)}>
-        <input type="text" className="boat-input" placeholder="Enter Boat Name" ref={input => this.textInput = input} aria-label="Add Boat" />
 
-        <select id="status" name="status" onChange={this.handleInputChange}>
-          <option value="">Select Boat Status</option>
-          <option value="DOCKED">DOCKED</option>
-          <option value="OUTBOUND_TO_SEA">OUTBOUND_TO_SEA</option>
-          <option value="INBOUND_TO_HARBOR">INBOUND_TO_HARBOR</option>
-          <option value="MAINTENANCE">MAINTENANCE</option>
-        </select>
-        <div>
-          <button className="button submit-button"> Submit </button>
-          &nbsp;&nbsp;
-          <button className="button cancel-button" onClick={() => this.setEditing(false)}>Cancel</button>
-        </div>
-      </form>
+    return (
+
+      <Modal show={this.state.show} onHide={this.handleClose}>
+        <form className="card add-task-form" onSubmit={(e) => this.onSubmit(e)}>
+          <Modal.Body className="text-left border-0">
+            <h3 className="modal-label">Please enter boat details</h3>
+            <div className='form-group'>
+              <input type="text" className="boat-input" placeholder="Enter Boat Name" ref={input => this.textInput = input} aria-label="Add Boat" />
+            </div>
+            <div className='form-group>'>
+              <select id="status" name="status" onChange={this.handleInputChange}>
+                <option value="">Select Boat Status</option>
+                <option value="DOCKED">DOCKED</option>
+                <option value="OUTBOUND_TO_SEA">OUTBOUND_TO_SEA</option>
+                <option value="INBOUND_TO_HARBOR">INBOUND_TO_HARBOR</option>
+                <option value="MAINTENANCE">MAINTENANCE</option>
+              </select>
+            </div>
+            <div className='button-alignment'>
+              <button className="button submit-button"> Submit </button>
+              &nbsp;&nbsp;
+              <button className="button cancel-button" onClick={() => this.setEditing(false)}>Cancel</button>
+            </div>
+          </Modal.Body>
+        </form>
+      </Modal>
+
     );
   }
 }
