@@ -51,10 +51,11 @@ router.post('/addBoat', (req, res) => {
  * Update API to change the status of boat
  */
 router.put('/updateboat', (req, res) => {
-    console.log("inside addboat call");
+    console.log("inside update call");
     console.log("request is: ", req.body);
+    
     con.connect(function(err) {
-        con.query(`UPDATE FishFryToursDB.boats SET status='${req.body.status}' WHERE name='${req.body.name}' AND id='${req.body.id}')`, function(err, result, fields) {
+        con.query(`UPDATE FishFryToursDB.boats SET status='${req.body.status}' WHERE id=${req.body.id}`, function(err, result, fields) {
             if (err) res.send(err);
             if (result) res.send(result);
         });

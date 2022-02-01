@@ -10,6 +10,7 @@ export default class Board extends Component {
     super(props);
     this.state = {
       boatlist: {},
+      draggedId: 0
     }
   }
 
@@ -34,46 +35,60 @@ export default class Board extends Component {
       })
   }
 
-  onDragStart = (e, fromBoatStatusList) => {
+  onDragStart = (e, id) => {
+    console.log("id dragged is:", id);
     const dragDetails = {
-      id: e.currentTarget.id,
-      fromBoatStatusList: fromBoatStatusList
+      id: id,
     }
-    console.log("id dragged is:", dragDetails.id);
+    this.setState({draggedId: id});
   }
 
   onDragOver = (e) => {
     e.preventDefault();
-  } 
-
-  onDrop = (e, boatId) => {
-    console.log("dropped id is: ", boatId);
   }
 
-render() {
-  console.log(this.state.boatlist)
-  return (
-    <Container fluid>
-      <Row>
-        {
-          Object.keys(this.state.boatlist).map((boatState, i) => (
-            <Col key={boatState}>
-              <h2 className={`name-header name-${i + 1}`}>{boatState}</h2>
-              {this.state.boatlist[boatState].map((boatInfo, i) => (
-                <div className="board" key={boatInfo}>
-                  <ul className="list-wrapper">
-                    <Boatstatus name={boatInfo.name} onDragStart = {(e, fromBoatStatusList) => this.onDragStart(e, `${boatInfo.id}`)}
-                    onDragOver = {(e) => this.onDragOver(e)}
-                    onDrop = {(e, boatId) => this.onDrop(e, `${boatInfo.id}`)} />
-                  </ul>
-                </div>
-              ))}
-            </Col>
-          )
-          )}
-      </Row>
-      <AddBoat boatlist={this.state.boatlist} />
-    </Container>
-  );
-}
+  onDrop = (e, id, status) => {
+    console.log("Inside onDrop");
+    console.log("id is: ", id);
+    console.log("status is: ", status);
+    console.log("dragged id:", this.state.draggedId);
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: Number(this.state.draggedId), status: status })
+    };
+  
+    fetch("http://localhost:3000/boats/updateboat", requestOptions)
+      .then(response => response.json())
+      .then(data => {})
+    window.location.reload(false);
+  }
+
+  render() {
+    console.log(this.state.boatlist)
+    return (
+      <Container fluid>
+        <Row>
+          {
+            Object.keys(this.state.boatlist).map((boatState, i) => (
+              <Col key={boatState}>
+                <h2 className={`name-header name-${i + 1}`}>{boatState}</h2>
+                {this.state.boatlist[boatState].map((boatInfo, i) => (
+                  <div>
+                    <ul className='list'>
+                      <Boatstatus name={boatInfo.name} status={boatInfo.status} onDragStart={(e, id) => this.onDragStart(e, `${boatInfo.id}`)}
+                        onDragOver={(e) => this.onDragOver(e)}
+                        onDrop={(e, id, status) => this.onDrop(e, `${boatInfo.id}`, `${boatInfo.status}`)} />
+                    </ul>
+                  </div>
+
+                ))}
+              </Col>
+            )
+            )}
+        </Row>
+        <AddBoat boatlist={this.state.boatlist} />
+      </Container>
+    );
+  }
 }
