@@ -6,10 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var boatStatusRouter = require('./routes/boatstatus');
 var boatsRouter = require('./routes/boats');
-// var addboatRouter = require('./routes/addboat');
 var app = express();
 
 // view engine setup
@@ -24,13 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/boatstatus', boatStatusRouter);
-app.use('/users', usersRouter);
 app.use('/boats', boatsRouter);
-app.use('/boats/addBoat', boatsRouter);
-app.use('/boats/updateStatus', boatStatusRouter);
-// app.use('/boats/add', addboatRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,9 +4,9 @@ var app = express();
 var router = express.Router();
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
 
 /**
  * Connecting Database
@@ -39,7 +39,7 @@ router.post('/addBoat', (req, res) => {
     console.log("inside addboat call");
     console.log("request is: ", req.body);
     con.connect(function(err) {
-        con.query(`INSERT INTO FishFryToursDB.boats (name,status) values ('${req.body.name}', "DOCKED")`, function(err, result, fields) {
+        con.query(`INSERT INTO FishFryToursDB.boats (name,status) values ('${req.body.name}', '${req.body.status}')`, function(err, result, fields) {
             if (err) res.send(err);
             if (result) res.send(result);
             console.log("result is: ", result);

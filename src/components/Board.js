@@ -19,6 +19,7 @@ export default class Board extends Component {
     fetch("http://localhost:3000/boats")
       .then(response => response.json())
       .then(data => {
+        console.log("fata inside board.js is:", data);
         const dataByStatus = {}
         dataByStatus['DOCKED'] = data.filter((boat) => boat.status == 'DOCKED')
         dataByStatus['OUTBOUND_TO_SEA'] = data.filter((boat) => boat.status == 'OUTBOUND_TO_SEA')
@@ -33,6 +34,22 @@ export default class Board extends Component {
       })
   }
 
+  onDragStart = (e, fromBoatStatusList) => {
+    const dragDetails = {
+      id: e.currentTarget.id,
+      fromBoatStatusList: fromBoatStatusList
+    }
+    console.log("id dragged is:", dragDetails.id);
+  }
+
+  onDragOver = (e) => {
+    e.preventDefault();
+  } 
+
+  onDrop = (e, boatId) => {
+    console.log("dropped id is: ", boatId);
+  }
+
 render() {
   console.log(this.state.boatlist)
   return (
@@ -45,7 +62,9 @@ render() {
               {this.state.boatlist[boatState].map((boatInfo, i) => (
                 <div className="board" key={boatInfo}>
                   <ul className="list-wrapper">
-                    <Boatstatus name={boatInfo.name} />
+                    <Boatstatus name={boatInfo.name} onDragStart = {(e, fromBoatStatusList) => this.onDragStart(e, `${boatInfo.id}`)}
+                    onDragOver = {(e) => this.onDragOver(e)}
+                    onDrop = {(e, boatId) => this.onDrop(e, `${boatInfo.id}`)} />
                   </ul>
                 </div>
               ))}
