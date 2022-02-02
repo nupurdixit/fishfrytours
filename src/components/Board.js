@@ -5,6 +5,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Board.css';
 
+/**
+ * This class is the main class responsible to list the boats and their status. Logic to iterate the 
+ * rows in the database table via get api is present here. For modularity and clarity, there are other components 
+ * included as their children which will take care of adding boat card and listing the boats.
+ */
 export default class Board extends Component {
   constructor(props) {
     super(props);

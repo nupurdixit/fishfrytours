@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import './AddBoat.css';
-import { Button, Modal, ModalBody } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
+import './AddBoat.css';
+
+/**
+ * This class is responsible to add a boat card based when the "Add Boat" button is clicked". On clicking, a Modal will pop up
+ * with form inside it. It will ask for boat name and selecting boat status from a dropdown. On submit, POST API  will be called
+ * on backend and the database will be updated. The react page will be refreshed to show all boats including the new one.
+ */
 export default class AddBoat extends React.Component {
   constructor(props) {
     super(props);
