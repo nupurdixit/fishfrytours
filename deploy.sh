@@ -1,5 +1,5 @@
 #!/bin/sh
-git pull origin master
+git pull origin main
 npm install
 npm run-script build
 cd fishfrytoursapi
