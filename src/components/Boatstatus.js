@@ -17,7 +17,7 @@ export default class Boatstatus extends React.Component {
   render() {
     return (
       <div>
-        <ul onDragOver={this.props.onDragOver} onDrop={this.props.onDrop}>
+        <ul className='ul-list' onDragOver={this.props.onDragOver} onDrop={this.props.onDrop}>
           <Boats name={this.props.name} onDragStart={this.props.onDragStart} />
         </ul>
       </div>
