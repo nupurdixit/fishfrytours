@@ -8,7 +8,7 @@ app.use(express.json());
 /**
  * Connecting to RDS database on AWS
  */
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const con = mysql.createConnection({
     host: "fishfrytoursdbinstance.ce1skhgo9kq8.ca-central-1.rds.amazonaws.com",
     user: "fishfryadmin",
