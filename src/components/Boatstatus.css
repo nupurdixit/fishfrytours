@@ -13,18 +13,6 @@
     margin: 0;
   }
   
-  .name-1 {
-    background-color: rgb(189, 136, 189);
-  }
-  
-  .name-2 {
-    background-color: aqua;
-  }
-  
-  .name-3 {
-    background-color: rgb(101, 101, 159);
-  }
-  
-  .name-4 {
-    background-color: red;
+  .name {
+    background-color: darkgray;
   }

@@ -4,12 +4,9 @@ var app = express();
 var router = express.Router();
 
 app.use(express.json());
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
 
 /**
- * Connecting Database
+ * Connecting to RDS database on AWS
  */
 const mysql = require('mysql');
 const con = mysql.createConnection({
@@ -20,7 +17,7 @@ const con = mysql.createConnection({
 
 
 /**
- * Get the list of boats along with their status
+ * Get the list of boats along with their status.
  */
 router.get('/', (req, res) => {
     con.connect(function(err) {
@@ -33,7 +30,7 @@ router.get('/', (req, res) => {
 
 
 /**
- * Create API called for adding boat
+ * Create API for adding new boat. Fields in the boat will be its name and status.
  */
 router.post('/addBoat', (req, res) => {
     console.log("inside addboat call");
@@ -48,7 +45,8 @@ router.post('/addBoat', (req, res) => {
 });
 
 /**
- * Update API to change the status of boat
+ * Update API to change the status of boat. This will be called when the user wants to move the boat
+ *  to some other status via dragging.
  */
 router.put('/updateboat', (req, res) => {
     console.log("inside update call");
@@ -61,7 +59,5 @@ router.put('/updateboat', (req, res) => {
         });
     });
 });
-
-
 
 module.exports = router;

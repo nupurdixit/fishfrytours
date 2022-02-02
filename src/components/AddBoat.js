@@ -52,7 +52,7 @@ export default class AddBoat extends React.Component {
       };
       fetch('http://localhost:3000/boats/addBoat', requestOptions)
         .then(response => response.json())
-      //.then(data => <p> {setAddSuccessMessage} </p>);
+    
       console.log("Inside AddBoat");
       console.log("boatlist is:", this.props.boatlist);
     }

@@ -27,7 +27,6 @@ export default class Board extends Component {
         dataByStatus['INBOUND_TO_HARBOR'] = data.filter((boat) => boat.status == 'INBOUND_TO_HARBOR')
         dataByStatus['MAINTENANCE'] = data.filter((boat) => boat.status == 'MAINTENANCE')
 
-
         this.setState({
           boatlist: dataByStatus
         });
@@ -48,10 +47,6 @@ export default class Board extends Component {
   }
 
   onDrop = (e, id, status) => {
-    console.log("Inside onDrop");
-    console.log("id is: ", id);
-    console.log("status is: ", status);
-    console.log("dragged id:", this.state.draggedId);
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -72,7 +67,7 @@ export default class Board extends Component {
           {
             Object.keys(this.state.boatlist).map((boatState, i) => (
               <Col key={boatState}>
-                <h2 className={`name-header name-${i + 1}`}>{boatState}</h2>
+                <h2 className="name-header name">{boatState}</h2>
                 {this.state.boatlist[boatState].map((boatInfo, i) => (
                   <div>
                     <ul className='list'>
