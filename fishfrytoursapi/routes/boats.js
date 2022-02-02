@@ -12,7 +12,8 @@ const mysql = require('mysql2');
 const con = mysql.createConnection({
     host: "fishfrytoursdbinstance.ce1skhgo9kq8.ca-central-1.rds.amazonaws.com",
     user: "fishfryadmin",
-    password: "fishfrypassword"
+    password: "fishfrypassword",
+    database: "FishFryToursDB"
 });
 
 
