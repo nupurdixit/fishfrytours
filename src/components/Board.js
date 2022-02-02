@@ -22,7 +22,7 @@ export default class Board extends Component {
   componentDidMount() {
     this.setState({ loading: true });
 
-    fetch("http://localhost:3000/boats")
+    fetch("/boats")
       .then(response => response.json())
       .then(data => {
         console.log("fata inside board.js is:", data);
@@ -58,7 +58,7 @@ export default class Board extends Component {
       body: JSON.stringify({ id: Number(this.state.draggedId), status: status })
     };
   
-    fetch("http://localhost:3000/boats/updateboat", requestOptions)
+    fetch("/boats/updateboat", requestOptions)
       .then(response => response.json())
       .then(data => {})
     window.location.reload(false);

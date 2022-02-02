@@ -56,7 +56,7 @@ export default class AddBoat extends React.Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newBoatName, status: newBoatStatus })
       };
-      fetch('http://localhost:3000/boats/addBoat', requestOptions)
+      fetch('/boats/addBoat', requestOptions)
         .then(response => response.json())
     
       console.log("Inside AddBoat");
