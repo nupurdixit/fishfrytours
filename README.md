@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+The application has been designed using React JS framework on front end and Express as the server side framework. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Backend Overview
 
-## Available Scripts
+There are 3 API’s created for this task. 
+GET : For retrieving the list of boats and their status
+POST : For adding a new boat
+PUT : For updating the status of an existing boat
 
-In the project directory, you can run:
 
-### `npm start`
+# Frontend Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+As the frontend is built using react, thus we have divided the main component responsible to show a board with boats and their respective status, into sub-components / children. The UI shows a board with 4 different columns corresponding to each status. There are 4 statuses : DOCKED, OUTBOUND_TO_SEA, INBOUND_TO_HARBOR and MAINTENANCE.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The board has the status and the boats corresponding to them are listed below them. This could be viewed either on desktop or mobile. 
 
-### `npm test`
+There is a button “Add Boat” for the user to add a new boat. I have made use of Modal so that the form looks a little pretty by popping in between. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I made use of children/sub components so as to enhance modularity and loose coupling. This would be useful in case of adding any new features in the future.
 
-### `npm run build`
+I have made use of a bootstrap grid so as to give the board a clean look.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Few things which could not be done due to time constraint
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Drag and drop feature in order to update the status is working for desktop version and not for mobile version. I could have deep dived in case of more time.
+I have written unit and functional tests using Jest in my company. However somehow I couldn't do the same here due to issues related to installing enzyme adapter. I have used shallow to get into the component and then tested different features corresponding to the same. Due to the missing adapter class, could not proceed.
